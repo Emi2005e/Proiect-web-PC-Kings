@@ -149,7 +149,7 @@ h1, h2, h3 {
 }
 
 #tab-orar tbody td:hover {
-    background-color: var(--culoare-highlight); 
+    background-color: var(--culoare-highlight) !important; 
     color: white;
     cursor: pointer;
 }
