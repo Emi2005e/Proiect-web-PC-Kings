@@ -1,0 +1,44 @@
+/* Cerinta 7 a d f */
+#link-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.5; /* semi-transparent */
+    transition: opacity 0.6s ease;
+    text-decoration: none;
+    z-index: 100; /* mereu deasupra textului */
+}
+/* Cerinta 7 f */
+#link-top:hover {
+    opacity: 1; 
+}
+
+/* Cerinta 7 b c  */
+#link-top .cerc-bkg {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: 50%;
+    border: 3px dashed var(--culoare-contur);
+    background: linear-gradient(135deg, var(--culoare-contur), var(--culoare-fundal), var(--culoare-contur));
+    
+    /* tranzitie rotire */
+    transition: transform 0.6s ease-in-out;
+    z-index: 1;
+}
+ /* Cerinta 7 c sageata nu se roteste */
+#link-top .sageata {
+    position: relative;
+    z-index: 2;
+    color: var(--culoare-text);
+    font-size: 32px;
+    font-weight: bold;
+}
+/* Cerinta 7 c*/
+#link-top:hover .cerc-bkg {
+    transform: rotate(360deg);
+}   

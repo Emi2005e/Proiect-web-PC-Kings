@@ -1,0 +1,31 @@
+{
+  "name": "pc_kings",
+  "version": "1.0.0",
+  "description": "magazin pentru componente hardware",
+  "keywords": [
+    "magazin",
+    "componente",
+    "PC",
+    "hardware",
+    "calculatoare",
+    "PC",
+    "Kings",
+    "PC",
+    "PC",
+    "ieftin",
+    "calculator",
+    "bun"
+  ],
+  "license": "ISC",
+  "author": "Memu Emanuel nicolas",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "ejs": "^5.0.1",
+    "express": "^5.2.1",
+    "nodemon": "^3.1.14"
+  }
+}

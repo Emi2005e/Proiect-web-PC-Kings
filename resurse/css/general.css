@@ -1,0 +1,309 @@
+body {
+    /* Schema cromatica */
+    --culoare-fundal: #B3B4E6;
+    --culoare-text: #000000;
+    --culoare-contur: #0509E6;
+    --culoare-highlight: #9F25E6;
+    --culoare-hover: #1E61E6;
+    --bk-dif: #ffffff66;
+    --tab1: #0509e61a;
+    --tab2: #9f25e61a;
+    
+    --margine-pagina: 120px;
+
+    background-color: var(--culoare-fundal);
+    color: var(--culoare-text);
+
+    /* Cerinta 3A spatiere stg-dr*/
+    --margine-pagina: 120px;
+    
+    /* Cerinta 3B gap*/
+    --spatiere-grid: 15px;
+    
+    /* Cerinta 3D padding*/
+    --padding-sectiuni: 20px;
+
+    margin-left: var(--margine-pagina);
+    margin-right: var(--margine-pagina);
+    /* Cerinta 4 */
+    font-family: 'Roboto', sans-serif;
+}
+
+
+html {
+    font-size: 16px;
+    transition: font-size 0.4s ease-in-out; 
+}
+
+
+/* Ecren mare */
+#grid-pagina {
+    display: grid;
+    gap: var(--spatiere-grid);
+    /* 4 col */
+    grid-template-columns: 1fr 1fr 1fr 1fr; 
+    grid-template-areas: 
+        "z-welcome z-welcome z-welcome z-welcome"    /* Zona 1 */
+        "z-online z-statistici z-statistici z-server"   /* Zonele 5, 6, 7 */
+        "z-calendar z-calendar z-orar z-orar"     /* Zona 3, Zona 2 */
+        "z-anunturi z-anunturi z-orar z-orar"     /* Zona 4, Zona 2*/
+        "z-diverse z-diverse z-diverse z-diverse";   /* Zona 8 */
+} 
+
+#welcome { grid-area: z-welcome; }
+#utilizatori-online { grid-area: z-online; }
+#statistici { grid-area: z-statistici; }
+#server { grid-area: z-server; }
+#calendar { grid-area: z-calendar; }
+#anunturi { grid-area: z-anunturi; }
+#orar { grid-area: z-orar; } 
+#diverse { grid-area: z-diverse; }
+
+/* Cerinta 3C 3D */ 
+header, footer, #grid-pagina > * {
+    /* Eff 1 */
+    border: 2px solid var(--culoare-contur);
+    
+    /* Eff2 colturi rotunjite */
+    border-radius: 12px;
+    
+    /* Eff 3 box shdw */
+    box-shadow: 0px 4px 8px var(--culoare-highlight);
+    
+    /* Eff 4 bckg diferit*/
+    background-color: var(--bk-dif); 
+    
+    /* Cerinta 3D */
+    padding: var(--padding-sectiuni);
+    
+    /* SPatiu sub header si deasupra la footer*/
+    margin-bottom: 20px; 
+
+
+    
+}
+
+ /* Cerinta 3E */
+img, iframe, video {
+    width: 100%;
+    max-width: 560px;
+    min-width: 200px;
+    height: auto;         /* proportii corecte */
+    border-radius: 8px;
+}
+/* Cerinta 4 */
+h1, h2, h3 {
+    font-family: 'Orbitron', sans-serif;
+}
+
+/* Cerinta 5 */
+
+.container-tabel {
+    width: 100%;
+    max-width: 100%;  
+    border-radius: 12px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    border: 2px solid var(--culoare-contur);
+    box-shadow: 0px 4px 8px var(--culoare-highlight);
+}
+
+#tab-orar {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+#tab-orar caption {
+    caption-side: bottom;
+    padding: 10px;
+    font-weight: bold;
+    color: var(--culoare-contur);
+}
+
+#tab-orar thead, #tab-orar tfoot {
+    background-color: var(--culoare-contur);
+    color: white;
+}
+
+#tab-orar th, #tab-orar td {
+    padding: 12px;
+    border: 1px solid var(--culoare-contur);
+}
+
+/* alternarea am facut o cu colgroupul <col> pt ca atfel nu merge(arata urat) */
+#tab-orar col:nth-child(odd) {
+    background-color: var(--tab1);
+}
+#tab-orar col:nth-child(even) {
+    background-color: var(--tab2);
+}
+
+#tab-orar tbody tr, #tab-orar tbody td {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#tab-orar tbody tr:hover td {
+    background-color: var(--culoare-hover); 
+    color: white;
+}
+
+#tab-orar tbody td:hover {
+    background-color: var(--culoare-highlight); 
+    color: white;
+    cursor: pointer;
+}
+
+/* Fin cerinta 5 */
+
+figure>img{
+    width:100%;
+}
+main{
+    margin-left: var(--margine-pagina);
+    margin-right: var(--margine-pagina);
+}
+
+figure{
+    margin: 0; /*resetare margine*/
+}
+
+
+#grid-galerie img {
+    width: 250px;
+    height: 200px;
+    object-fit: cover;
+}
+ /* Cerinta 6 */
+.container-iframe{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+}
+.taburi-iframe{
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    position: relative;
+    z-index: 2;
+}
+
+.taburi-iframe >a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width:160px;
+    height: 35px;
+
+    background-color: var(--culoare-fundal);
+    border: 2px solid var(--culoare-contur);
+    border-bottom: 2px solid var(--culoare-fundal); 
+    border-radius: 8px 8px 0 0;
+
+    color: var(--culoare-text);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.taburi-iframe > a:hover {
+    background-color: var(--culoare-hover);
+    border-bottom-color: var(--culoare-hover);
+    color: white;
+}
+
+.container-iframe > iframe[name="ifr-video"] {
+    border: 2px solid var(--culoare-contur);
+    border-radius: 8px; 
+    background-color: white;
+    position: relative;
+    z-index: 1;
+    max-width: 560px;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+}
+/* Cerinta 6 fin */
+
+
+/* Ecran mediu */
+@media screen and (max-width: 1200px) {
+
+    html {
+        font-size: 15px;
+    }
+    body {
+        --margine-pagina: 60px;
+        --spatiere-grid: 10px;
+        --padding-sectiuni: 15px;
+    }
+    
+    #grid-pagina {
+        grid-template-columns: 1fr 1fr; /* 2col */
+        grid-template-areas: 
+            "z-welcome z-welcome"
+            "z-online z-statistici"
+            "z-server z-calendar"
+            "z-anunturi z-anunturi"
+            "z-orar z-orar"
+            "z-diverse z-diverse";
+    }
+}
+
+/* Ecran mic */
+@media screen and (max-width: 700px) {
+
+    html {
+        font-size: 14px;
+    }
+    body {
+        --margine-pagina: 10px;
+        --spatiere-grid: 5px;
+        --padding-sectiuni: 10px;
+    }
+    
+    #grid-pagina {
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+            "z-welcome"
+            "z-online"
+            "z-statistici"
+            "z-server"
+            "z-calendar"
+            "z-anunturi"
+            "z-orar"
+            "z-diverse";
+    }
+
+    * {
+        animation: none !important;
+    }
+}
+
+/* Bonus2 et2 */
+.formula-putere {
+    font-size: 1.5rem;
+    padding: 15px;
+    background-color: var(--tab1); /* Un fundal subtil */
+    border-radius: 8px;
+    border: 1px dashed var(--culoare-contur);
+    display: inline-block;
+}
+
+/* Stilizare variabile */
+.formula-putere mi {
+    color: var(--culoare-highlight);
+    font-weight: bold;
+    font-style: italic;
+}
+
+/* Stilizare operatori */
+.formula-putere mo {
+    color: var(--culoare-contur);
+    font-size: 1.3em;
+    font-weight: 900;
+    margin: 0 8px;
+}

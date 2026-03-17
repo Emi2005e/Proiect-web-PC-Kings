@@ -1,0 +1,86 @@
+/* variabile */
+:root {
+   /* Dim si soatieri */
+    --reset-spatiu-baza: 1rem;
+    --reset-spatiu-mic: calc(var(--reset-spatiu-baza) / 2);
+    --reset-spatiu-mare: calc(var(--reset-spatiu-baza) * 2);
+    
+    /* Culori și font */
+    --reset-culoare-text: #000000;
+    --reset-grosime-bold: 700;
+}
+
+
+   /* html si body cu unitati fixe */
+html, body {
+    font-size: 16px;
+    color: var(--reset-culoare-text);
+}
+
+/* Reset Eric Meyer */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* Redef liste */
+ul {
+    list-style-type: disc;
+    padding-left: var(--reset-spatiu-mare);
+    margin-bottom: var(--reset-spatiu-baza);
+}
+
+ol {
+    list-style-type: decimal;
+    padding-left: var(--reset-spatiu-mare);
+    margin-bottom: var(--reset-spatiu-baza);
+}
+
+li {
+    margin-bottom: var(--reset-spatiu-mic);
+    font-size: 1rem;
+}
+
+/* Redef bold si italic */
+b, strong {
+    font-weight: var(--reset-grosime-bold);
+    font-size: 1.05em;
+}
+
+i, em {
+    font-style: italic;
+    font-size: 0.95em;
+}
+
+/* Redef tabele */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: var(--reset-spatiu-baza);
+}
+
+th, td {
+    padding: var(--reset-spatiu-mic);
+    font-size: 1rem;
+    text-align: left;
+}
+
+th {
+    font-weight: var(--reset-grosime-bold);
+}
