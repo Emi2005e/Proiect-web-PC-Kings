@@ -3,20 +3,19 @@
 <html lang="ro">
 <!-- Cerintele 2, 3 si 5-->
 <head>
-    <meta charset="UTF-8">
     <title> PC Kings </title>
     <meta name="description" content="PC Kings, perfect pentru PC-ul tau!">
     <meta name="keywords"
         content=" magazin componente PC, hardware calculatoare, PC Kings, PC, PC ieftin, calculator bun,
          calculator ieftin, oferte componente PC, PC la reducere, PC gaming, PC office, PC editare video, calculator gaming, cel mai bun PC">
-    <%- include("../fragmente/head.ejs")>
-    
-
+         <%- include('../fragmente/head.ejs') %>
 </head>
 
 <body id="top">
-    <%- include("../fragmente/header.ejs")>
+    <div id="watermark">Memu<br>Emanuel Nicolas</div>
+    <%- include('../fragmente/header.ejs') %>
         <main> <div id="grid-pagina">
+
             <section id="welcome">
                 <!-- Cerinta 7 -->
                 <hgroup>
@@ -45,6 +44,128 @@
                     <p>Gradul de satisfacție al clienților noștri: <meter value="96" min="0" max="100" low="40" high="90" optimum="100">96%</meter> (96% recenzii pozitive!)</p>
  
             </section>
+            <!-- Sectiuni noi etapa 2 -->
+            <section id="utilizatori-online" class="cutie-grid">
+                <h3>Utilizatori Online</h3>
+                <p>IP-ul tău este: <%- locals.ip %></p>
+            </section>
+            <section id="statistici" class="cutie-grid">
+                <h3>Statistici Site</h3>
+                <p>Lorem ipsum dolor sit amet.</p>
+            </section>
+            <section id="server" class="cutie-grid">
+                <h3>Date Server</h3>
+                <p>Lorem ipsum dolor sit amet.</p>
+            </section>
+            <section id="calendar" class="cutie-grid">
+                <h3>Calendar Evenimente</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </section>
+
+            <!-- Cerinta 10 -->
+            <section id="anunturi">
+                <h2 class="fg-img">Evenimente și Anunțuri</h2>
+                <ul>
+                    <li>
+                        <b>Lansare generație nouă GPU:</b> Pe data de <time datetime="2026-07-20">20 iulie 2026</time> vă așteptăm în magazin pentru testarea noilor plăci video.
+                    </li>
+                    <li>
+                        <b>Restocare masivă:</b> Începând cu <time datetime="2026-01-05">5 ianuarie 2026</time> vom aduce stocuri noi la procesoarele high-end!
+                    </li>
+                    <li>
+                        <b>Reduceri de iarnă:</b> Pe <time datetime="2026-12-28">28 decembrie 2026</time> vom adăuga memorii RAM RGB în ofertă la preț promoțional.
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Cerinta 15 -->
+            <section id="orar">
+                <h2>Orar</h2>
+                <div class="container-tabel">
+                <table id="tab-orar">
+                    <caption>Programul de funcționare al magazinului fizic PC Kings</caption>
+                    <colgroup>
+                    <col><col><col><col><col><col>
+                    </colgroup>
+                    <thead>
+
+                        <tr>
+                            <th>Cod</th>
+                            <th>Perioadă</th>
+                            <th>Zi</th>
+                            <th>Interval dimineata</th>
+                            <th>Pauza de masa</th>
+                            <th>Interval seară</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td rowspan="5">Zile<br/>Lucrătoare</td>
+                            <td>Luni</td>
+                            <td>10-12</td>
+                            <td>12-13</td>
+                            <td>14-22</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            
+                            <td>Marti</td>
+                            <td>10-12</td>
+                            <td>12-13</td>
+                            <td>14-22</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            
+                            <td>Miercuri</td>
+                            <td>10-11</td>
+                            <td>11-12</td>
+                            <td>12-22</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            
+                            <td>Joi</td>
+                            <td>10-11</td>
+                            <td>11-12</td>
+                            <td>12-20</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            
+                            <td>Vineri</td>
+                            <td>10-13</td>
+                            <td>13-14</td>
+                            <td>14-22</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td rowspan="2">Weekend</td>
+                            <td>Sambata</td>
+                            <td>10-12</td>
+                            <td>12-13</td>
+                            <td>13-16</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Duminica</td>
+                            <td>10-14</td>
+                            <td>-------</td>
+                            <td>inchis</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="6">Închis cu ocazia sărbătorilor legale</td>
+                        </tr>
+                    </tfoot>
+                </table> </div>
+                <!-- Cerinta 12c -->
+                <p><strong>Atentie!!!</strong> in prima zi a lunii se face inventarul, deci s-ar putea ca timpul de asteptare sa fie mai mare!.</p>
+            </section>
+
+            <div id="diverse">
             <section id="promotii">
                 <h2>Promoții și oferte</h2>
                 <article>
@@ -184,7 +305,7 @@
                 <section>
                     <h3>Calcul Putere Sursă (Legea lui Watt)</h3>
                     <p>Pentru a alege sursa perfectă pentru PC-ul tău, folosim formula puterii electrice:</p>
-                    <math xmlns="http://www.w3.org/1998/Math/MathML" style="font-size: 24px; padding: 10px;">
+                    <math xmlns="http://www.w3.org/1998/Math/MathML" class="formula-putere">
                         <mrow>
                             <mi>P</mi>
                             <mo>=</mo>
@@ -196,88 +317,7 @@
                     <p>Unde <b>P</b> = Puterea (Wați), <b>V</b> = Tensiunea (Volți), iar <b>I</b> = Intensitatea (Amperi).</p>
                 </section>
             </section>
-            <!-- Cerinta 15 -->
-            <section id="orar">
-                <h2>Orar</h2>
-                <table id="tab-orar">
-                    <caption>Programul de funcționare al magazinului fizic PC Kings</caption>
-                    <thead>
-
-                        <tr>
-                            <th>Cod</th>
-                            <th>Perioadă</th>
-                            <th>Zi</th>
-                            <th>Interval dimineata</th>
-                            <th>Pauza de masa</th>
-                            <th>Interval seară</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td></td>
-                            <td rowspan="5">Zile<br/>Lucrătoare</td>
-                            <td>Luni</td>
-                            <td>10-12</td>
-                            <td>12-13</td>
-                            <td>14-22</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            
-                            <td>Marti</td>
-                            <td>10-12</td>
-                            <td>12-13</td>
-                            <td>14-22</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            
-                            <td>Miercuri</td>
-                            <td>10-11</td>
-                            <td>11-12</td>
-                            <td>12-22</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            
-                            <td>Joi</td>
-                            <td>10-11</td>
-                            <td>11-12</td>
-                            <td>12-20</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            
-                            <td>Vineri</td>
-                            <td>10-13</td>
-                            <td>13-14</td>
-                            <td>14-22</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td rowspan="2">Weekend</td>
-                            <td>Sambata</td>
-                            <td>10-12</td>
-                            <td>12-13</td>
-                            <td>13-16</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>Duminica</td>
-                            <td>10-14</td>
-                            <td>-------</td>
-                            <td>inchis</td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="6">Închis cu ocazia sărbătorilor legale</td>
-                        </tr>
-                    </tfoot>
-                </table> 
-                <!-- Cerinta 12c -->
-                <p><strong>Atentie!!!</strong> in prima zi a lunii se face inventarul, deci s-ar putea ca timpul de asteptare sa fie mai mare!.</p>
-            </section>
+            
             <figure id="fig1" class="fg-img">
                 <img src="resurse/imagini/PCGaming1.jpg" alt="PCGaming1" style="width: 400px;">
                 <figcaption>PC Gaming  Halloween 1</figcaption>
@@ -290,21 +330,7 @@
             <img src="resurse/imagini/PCGaming3.jpg" alt="PCGaming3" style="width: 400px;">
             <figcaption>PC Gaming Halloween 3</figcaption>
             </figure>
-            <!-- Cerinta 10 -->
-            <section id="anunturi">
-                <h2 class="fg-img">Evenimente și Anunțuri</h2>
-                <ul>
-                    <li>
-                        <b>Lansare generație nouă GPU:</b> Pe data de <time datetime="2026-07-20">20 iulie 2026</time> vă așteptăm în magazin pentru testarea noilor plăci video.
-                    </li>
-                    <li>
-                        <b>Restocare masivă:</b> Începând cu <time datetime="2026-01-05">5 ianuarie 2026</time> vom aduce stocuri noi la procesoarele high-end!
-                    </li>
-                    <li>
-                        <b>Reduceri de iarnă:</b> Pe <time datetime="2026-12-28">28 decembrie 2026</time> vom adăuga memorii RAM RGB în ofertă la preț promoțional.
-                    </li>
-                </ul>
-            </section>
+
             <!-- Cerinta 16 -->
             <section id="index-intrebari">
                 <h2>Întrebări frecvente</h2>
@@ -324,7 +350,7 @@
                 <p>Dacă ești pasionat de istoria hardware-ului, citește despre <a href="https://ro.wikipedia.org/wiki/Unitate_central%C4%83_de_prelucrare#Istorie">Istoria<wbr>Microprocesoarelor<wbr>Moderne<wbr>Din<wbr>Zilele<wbr>Noastre</a> pe Wikipedia.</p>
             </section>
 
-        </div>
+        
         <section id="galerie-statica">
             <h2>Galerie</h2>
             <div id="grid-galerie">
@@ -381,9 +407,26 @@
             </map>
 
         </section>
+        <!-- Etapa4 -->
+        <section class="sectiune-video">
+        <h2>Prezentare PC Kings</h2>
+    
+        <video poster="/resurse/imagini/poster-video.jpg" controls preload="metadata" class="video-vtt">
+        
+        <source src="/resurse/video/gameplay.mp4" type="video/mp4">
+        <source src="/resurse/video/gameplay.webm" type="video/webm">
+        
+        <track src="/resurse/vtt/ro.vtt" kind="subtitles" srclang="ro" label="Română" default>
+        <track src="/resurse/vtt/en.vtt" kind="subtitles" srclang="en" label="English">
+        
+        <p class="eroare-video">Browser-ul tău nu suportă elementul video.</p>
+        </video>
+        </section>
+    <!-- Etapa4 -->
+
         <section id="tutoriale">
             <!-- Cerinta 14 -->
-            <h2>Tutoriale de asamblare</h2>
+            <h2><i class="fa-solid fa-gear fa-spin"></i>Tutoriale de asamblare</h2>
             <p>Dacă doriți să vă asamblați singuri PC-urile
                 vă recomandăm următoarele tutoriale simple pe care sperăm să le încercați, să vedeți cât e de complicat să le faceți, 
                 să vă dați în final bătuți și să veniți să cumpărați sisteme gata făcute de la noi. Mulțumim!</p>
@@ -394,7 +437,7 @@
                 <a href="https://www.youtube.com/embed/-HuEPH5MZ6U" target="ifr-video" > Tutorial montare PC pe birou &nbsp; </a><br/>
                 </div>
                 <iframe width="560" height="315" src="https://www.youtube.com/embed/hrSyZv_6Bxw" name="ifr-video" title="YouTube video player" style="border: none;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                <br>
+                
                 <!-- Bonus5 -->
                 <iframe width="560" height="315" 
                     src="https://www.youtube.com/embed?listType=playlist&list=PLUv1ErLTtPacgrFNgYFNPJX8k_HGi_MLr&autoplay=1&controls=1&loop=1" 
@@ -415,9 +458,14 @@
         </section>
 
 
-
+        </div></div>
     </main>
-    <%- include("../fragmente/footer.ejs")>
+    <%- include('../fragmente/footer.ejs') %>
+    <!-- Etapa2 cerinta 7 -->
+    <a href="#top" id="link-top" title="Revino la începutul paginii!">
+    <div class="cerc-bkg"></div>
+    <span class="sageata">&#8593;</span>
+    </a>
 </body>
 
 </html>

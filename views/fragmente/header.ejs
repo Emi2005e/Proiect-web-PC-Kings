@@ -1,4 +1,5 @@
-<nav class="bara-meniu">
+<header>
+    <nav class="bara-meniu">
     <input type="checkbox" id="buton-hamburger" style="display: none;">
     <label for="buton-hamburger" class="icon-hamburger">
     <div class="bara"></div>
@@ -7,37 +8,46 @@
 </label>
 
     <ul class="meniu">
+        
         <li>
             <a href="/">
                 <i class="fa-solid fa-house"></i> 
                 <span class="text-optiune">Acasă</span>
             </a>
+            <ul class="submeniu">
+                <li><a href="#promotii">Promoții de Sezon</a></li>
+                <li><a href="#produse">Produse Recomandate</a></li>
+                <li><a href="#tutoriale">Tutoriale PC</a></li>
+                <li><a href="#galerie-statica">Galerie Foto</a></li>
+            </ul>
         </li>
+
         <li>
-            <a href="/magazin">
+            <a href="catalog.html">
                 <i class="fa-solid fa-shop"></i> 
                 <span class="text-optiune">Magazin</span>
             </a>
             <ul class="submeniu">
-                <li><a href="/produse">Produse PC</a></li>
-                <li><a href="/promotii">Promoții de Sezon</a></li>
+                <li><a href="/despre"><span class="text-optiune">Despre Noi</span></a></li>
+                <li><a href="catalog.html">Catalog Produse</a></li>
+                <li><a href="produs.html">Pagina Produsului</a></li>
+                <li><a href="cos.html">Coșul de Cumpărături</a></li>
             </ul>
         </li>
+
         <li>
-            <a href="#tutoriale">
-                <i class="fa-solid fa-desktop"></i> 
-                <span class="text-optiune">Tutoriale</span>
-            </a>
-            <ul class="submeniu">
-                <li><a href="#hardware">Ghid Hardware</a></li>
-                <li><a href="#software">Ghid Software</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="/contact">
+            <a href="contact.html">
                 <i class="fa-solid fa-envelope"></i> 
                 <span class="text-optiune">Contact</span>
             </a>
         </li>
+        
     </ul>
 </nav>
+        <h1>PC Kings <i class="fa-solid fa-crown" style="font-size: 1.2em; color: var(--culoare-highlight);"></i></h1>
+        <img src="/resurse/imagini/sigla.jpg" alt="sigla" width="300"/>
+        <!-- Cerinta 13e -->
+        <p id="SiglaDesc">Descarca sigla noastra gratuit: <a href="/resurse/imagini/sigla.jpg" download="SiglaPCKings.jpg">Sigla PC Kings</a>.</p>
+        <!-- Cerinta 8 -->
+
+    </header>
