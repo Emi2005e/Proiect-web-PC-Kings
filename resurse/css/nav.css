@@ -1,3 +1,23 @@
+@charset "UTF-8";
+/* Bonus 2 et3 */
+@keyframes aparitie-bara {
+  0% {
+    opacity: 0;
+    transform: scaleX(0);
+    background-color: white;
+  }
+  50% {
+    opacity: 0.5;
+    transform: scaleX(1.2);
+    background-color: red;
+  }
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+    background-color: var(--culoare-highlight);
+  }
+}
+/* Bonus 2 et3 */
 nav.bara-meniu {
   width: 100%;
   background-color: var(--culoare-fundal);
@@ -119,25 +139,6 @@ ul.submeniu li:nth-child(5) a::after {
   z-index: 5;
 }
 
-/* Bonus 2 et3 */
-@keyframes aparitie-bara {
-  0% {
-    opacity: 0;
-    transform: scaleX(0);
-    background-color: white;
-  }
-  50% {
-    opacity: 0.5;
-    transform: scaleX(1.2);
-    background-color: red;
-  }
-  100% {
-    opacity: 1;
-    transform: scaleX(1);
-    background-color: var(--culoare-highlight);
-  }
-}
-/* Bonus 2 et3 */
 @media screen and (max-width: 900px) and (min-width: 601px) {
   ul.meniu > li > a {
     width: 60px;
@@ -191,7 +192,7 @@ ul.submeniu li:nth-child(5) a::after {
     top: 16px;
   }
   .icon-hamburger {
-    /* BONUS 3 delayuri succesive */
+    /* BONUS 3 delayuri succesive pt bari*/
   }
   .icon-hamburger .bara:nth-child(1) {
     animation-delay: 0.2s;
@@ -324,12 +325,10 @@ ul.submeniu li:nth-child(5) a::after {
     margin: 0 !important;
   }
   ul.meniu {
-    -moz-column-break-after: page;
-         break-after: page;
+    break-after: page;
   }
   footer {
-    -moz-column-break-before: page;
-         break-before: page;
+    break-before: page;
   }
   #banner-scolar {
     position: absolute !important;
@@ -405,4 +404,52 @@ ul.submeniu li:nth-child(5) a::after {
 
 #link-top:hover .cerc-bkg {
   transform: rotate(360deg);
-}/*# sourceMappingURL=nav.css.map */
+}
+
+a:visited {
+  color: var(--culoare-highlight);
+}
+
+a[href^=http]::before {
+  content: "⮧ ";
+  font-size: 1.5em;
+  transition: color 0.3s ease;
+}
+a[href^=http]:hover::before {
+  color: var(--culoare-hover);
+}
+
+main a {
+  position: relative;
+  text-decoration: underline;
+  border: 1px solid transparent;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background-image: radial-gradient(var(--tab1) 0%, var(--tab1) 40%, transparent 80%, transparent 100%);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 0% 0%;
+  transition: background-size 0.4s ease;
+}
+main a:hover {
+  background-size: 100% 100%;
+}
+main a:active {
+  border: 1px solid var(--culoare-contur);
+}
+
+.video-vtt {
+  width: 80%;
+  min-width: 300px;
+  max-width: 800px;
+  display: block;
+  margin: 20px auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+video::cue {
+  background-color: white;
+  color: var(--culoare-text);
+  font-weight: bold;
+}
