@@ -1,0 +1,502 @@
+$inaltime-meniu: 50px;
+$latime-buton: 180px;
+
+/* Bonus 2 et3 */
+@keyframes aparitie-bara {
+    0% {
+        opacity: 0;
+        transform: scaleX(0);
+        background-color: white;
+    }
+    50% {
+        opacity: 0.5;
+        transform: scaleX(1.2);
+        background-color: red;
+    }
+    100% {
+        opacity: 1;
+        transform: scaleX(1);
+        background-color: var(--culoare-highlight);
+    }
+}
+/* Bonus 2 et3 */
+
+nav.bara-meniu {
+    width: 100%;
+    background-color: var(--culoare-fundal);
+    position: relative;
+    z-index: 1000;
+}
+// Nu apare pe ecran mare
+.icon-hamburger {
+    display: none;
+    font-size: 2rem;
+    color: var(--culoare-highlight);
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+%stil-buton {
+    display: block;
+    width: $latime-buton;
+    height: $inaltime-meniu;
+    line-height: $inaltime-meniu;
+    text-align: center;
+    text-decoration: none;
+    color: var(--culoare-text);
+    transition: background-color 0.4s ease-in-out, text-shadow 0.4s ease-in-out;
+}
+
+ul.meniu {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    > li {
+        position: relative;
+        
+        > a {
+            @extend %stil-buton;
+            overflow: hidden;
+            border-left: 1px solid var(--culoare-contur);
+            border-right: 1px solid var(--culoare-contur);
+            /* Umbra sus la -40px */
+            text-shadow: 0px -40px 5px var(--culoare-highlight);
+        }
+
+        &:hover > a {
+            background-color: var(--culoare-hover);
+            /* Umbra cade pe text */
+            text-shadow: 0px 0px 2px var(--culoare-highlight);
+        }
+        ul.submeniu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            background-color: var(--tab1);
+            transform-origin: top center;
+            transform: scaleY(0);
+            opacity: 0;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+
+            li {margin: 0;
+                padding: 0;
+                display: block;
+                a { 
+                    @extend %stil-buton;
+                    background-color: var(--tab1);
+                    position: relative;
+                    margin:0; padding:0;
+                    border-left: none;
+                    border-right: none;
+                    border: none !important;
+                    &::after {
+                        // Subliniere treptata
+                        content: '';
+                        position: absolute;
+                        bottom: 8px; left: 50%;
+                        transform: translateX(-50%);
+                        width: 60%;
+                        height: 2px;
+                        background-color: var(--culoare-highlight);
+                        opacity: 0; 
+                        transition: opacity 0.4s ease;
+                    }
+
+                    &:hover {
+                        background-color: var(--culoare-hover);
+                        &::after { opacity: 1; }
+                    }
+                }
+            }
+        }
+        // Apare submeniul
+        &:hover ul.submeniu {
+            transform: scaleY(1);
+            opacity: 1;
+        }
+    }
+}
+// Aplic z-index pt fiecare cate unul diferit
+@for $i from 1 through 5 {
+    ul.submeniu li:nth-child(#{$i}) a::after { z-index: $i; }
+}
+
+
+
+@media screen and (max-width: 900px) and (min-width: 601px) {
+    ul.meniu > li > a {
+        width: 60px;
+        .text-optiune { display: none; }
+    }
+    ul.submeniu li a {
+        font-size: 0.80rem;
+    }
+}
+
+
+@keyframes rasfirare {
+    0% { 
+        letter-spacing: -10px; 
+        opacity: 0; 
+        transform: translateY(-10px); 
+    }
+    100% { 
+        letter-spacing: 0px; 
+        opacity: 1; 
+        transform: translateY(0);
+    }
+}
+
+
+@media screen and (max-width: 600px) {
+        /*bonus et3*/
+    .icon-hamburger { 
+        display: block; 
+        position: relative;
+        padding: 0;
+        width: 25px;
+        height: 18px;
+        margin: 25px 20px 15px 20px; 
+        cursor: pointer;
+        
+        .bara {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            border-radius: 2px;
+            background-color: var(--culoare-highlight);
+            animation: aparitie-bara 0.5s ease-out both; 
+        }
+        .bara:nth-child(1) { top: 0; }
+        .bara:nth-child(2) { top: 8px; }
+        .bara:nth-child(3) { top: 16px; }
+
+        /* BONUS 3 delayuri succesive pt bari*/
+        @for $i from 1 through 3 {
+            .bara:nth-child(#{$i}) {
+                animation-delay: #{$i * 0.2}s; 
+            }
+        }
+    }
+
+    ul.meniu {
+        display: none;
+        flex-direction: column;
+        
+        > li {
+            width: 100%;
+            
+            > a {
+                width: 100%;
+                text-align: center;
+                padding-left: 0;
+                text-shadow: none !important;
+                &::after {
+                    display: none;
+                }
+            }
+            
+            &:hover > a {
+                text-shadow: none !important; 
+            }
+            
+            ul.submeniu {
+                position: relative;
+                transform: scaleY(1);
+                display: none;
+                width: 100%;
+                
+                li {
+                    width: 100%;
+                    a {
+                        width: 100%;
+                        text-align: center;
+                        padding-left: 0;
+                        &::after {
+                            display: none !important;
+                        }
+                    }
+                    &:hover > a {
+                        background-color: var(--culoare-hover);
+                    }
+                }
+            }
+            
+            &:hover ul.submeniu {
+                display: block;
+            }
+            
+            &:first-child .text-optiune {
+                display: none;
+            }
+            
+            &:first-child a {
+                text-align: center;
+                padding-left: 0;
+            }
+        }
+    }
+
+    #buton-hamburger:checked ~ ul.meniu {
+        display: flex;
+        
+        > li {
+            animation: rasfirare 0.5s ease-out both !important;
+        }
+    }
+}
+
+#watermark {
+    display: none;
+}
+
+//Etapa 3 cerinta 2
+@media print {
+    * {
+        box-shadow: none !important;
+        background: transparent !important;
+    }
+
+    body, main, section, article, div {
+        width: auto !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: visible !important; 
+        position: static !important;
+        transform: none !important;
+    }
+
+
+    #SiglaDesc {
+        display: none !important;
+    }
+
+    // Etapa 3 cerinta 2.2
+    img, video, iframe, object, embed, canvas, svg, picture, figure,
+    #link-top {
+        display: none !important;
+    }
+
+    //Etapa 3 cerinta 2.4
+    a {
+        text-decoration: none !important;
+        color: black !important;
+        text-shadow: none !important;
+    }
+
+    //Etapa 3 cerinta 2.3
+    .container-tabel {
+        display: block !important;
+    }
+
+    //Etapa 3 cerinta 2.5
+    ul.meniu, ul.submeniu {
+        display: block !important;
+        padding-left: 20px !important;
+        margin-bottom: 20px !important;
+    }
+
+    ul.meniu li, ul.submeniu li {
+        display: list-item !important;
+        list-style-type: disc !important;
+        width: auto !important;
+        border: none !important; 
+    }
+
+    ul.meniu li a, ul.submeniu li a {
+        border: none !important; 
+        display: inline !important; 
+    }
+
+    ul.submeniu {
+        position: static !important;
+        opacity: 1 !important;
+        transform: none !important;
+        margin-left: 20px !important;
+        li { list-style-type: circle !important; }
+    }
+    //Etapa 3 cerinta 2.5 titlu h1
+    h1 {
+        position: absolute !important;
+        top: 60px !important;
+        left: 0 !important;
+        right: 0 !important;
+        text-align: center !important;
+        margin: 0 !important;
+    }
+
+    ul.meniu {
+        break-after: page;
+    }
+
+    footer {
+        break-before: page;
+    }
+
+    //Etapa 3 cerinta 2.1
+    #banner-scolar {
+        position: absolute !important;
+        top: 0 !important; right: 0 !important;
+        width: 50% !important;
+        border: 3px double black !important;
+        padding: 5px !important;
+        margin: 0 !important;
+    }
+    
+    //Etapa 3 cerinta 2.6
+    #watermark {
+        display: block !important;
+        position: fixed !important;
+        top: 45% !important;
+        left: 20% !important;
+        width: 60% !important;
+        height: 10% !important;
+        text-align: center !important;
+        color: rgba(0, 0, 0, 0.3) !important;
+        font-size: 3rem !important;
+        z-index: 9999 !important;
+        pointer-events: none !important;
+    }
+
+    //Etapa 3 cerinta 2.7
+    @page :left {
+        margin-left: 2cm;
+        margin-right: 1cm;
+    }
+    @page :right {
+        margin-left: 1cm;
+        margin-right: 2cm;
+    }
+}
+
+
+
+
+
+
+
+
+
+// Etapa2
+
+#link-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.5; /* semi-transparent */
+    transition: opacity 0.6s ease;
+    text-decoration: none;
+    z-index: 100; /* mereu deasupra textului */
+}
+
+#link-top:hover {
+    opacity: 1; 
+}
+
+/* Cerinta 7 b c  */
+#link-top .cerc-bkg {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: 50%;
+    border: 3px dashed var(--culoare-contur);
+    background: linear-gradient(135deg, var(--culoare-contur), var(--culoare-fundal), var(--culoare-contur));
+
+    transition: transform 0.6s ease-in-out;
+    z-index: 1;
+}
+
+#link-top .sageata {
+    position: relative;
+    z-index: 2;
+    color: var(--culoare-text);
+    font-size: 32px;
+    font-weight: bold;
+}
+
+#link-top:hover .cerc-bkg {
+    transform: rotate(360deg);
+}   
+
+
+
+
+
+// etapa 4 cerinta individuala 2
+
+a:visited {
+    color: var(--culoare-highlight);
+}
+a[href^="http"] {
+    &::before {
+        content: "⮧ "; 
+        font-size: 1.5em; 
+        transition: color 0.3s ease;
+    }
+    &:hover::before {
+        color: var(--culoare-hover);
+    }
+}
+main a {
+    position: relative;
+    text-decoration: underline;
+    border: 1px solid transparent;
+    padding: 3px 8px; 
+    border-radius: 4px;
+    background-image: radial-gradient(var(--tab1) 0%, var(--tab1) 40%, transparent 80%, transparent 100%);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 0% 0%;
+    transition: background-size 0.4s ease;
+
+    &:hover {
+        background-size: 100% 100%;
+    }
+
+    &:active {
+        border: 1px solid var(--culoare-contur);
+    }
+}
+
+
+
+
+
+
+
+
+// etapa 4
+
+.video-vtt {
+    width: 80%;
+    min-width: 300px;
+    max-width: 800px;
+    display: block;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+
+video::cue {
+    background-color: white;
+    color: var(--culoare-text);
+    font-weight: bold;
+}
+
+// Etapa4
