@@ -1,0 +1,71 @@
+/* Etapa 5 cerinta 1 */
+.galerie-grid {
+    display: grid;
+    width: 100%;
+    gap: 20px;
+    padding: 20px 0;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.galerie-item {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: var(--tab1);
+    text-align: center;
+
+    img {
+        width: 100%;
+        height: auto;
+        display: block;
+        box-sizing: border-box;
+        border: 0px solid var(--culoare-contur);
+        transition: transform 1.2s ease, border-width 1.2s ease;
+    }
+
+    figcaption {
+        padding: 10px;
+        font-weight: bold;
+        color: var(--culoare-text);
+        font-size: 0.9rem;
+        &::before {
+            content: counter(numar-poza, upper-roman) ". "; 
+        }
+    }
+    &:hover img {
+        transform: scale(1.25) rotate(-10deg);
+        border-width: 4px;
+    }
+}
+
+@media screen and (max-width: 900px) and (min-width: 601px) {
+    .galerie-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .galerie-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+body {
+    counter-reset: numar-poza;
+}
+
+.galerie-item figcaption::before {
+    counter-increment: numar-poza;
+    content: counter(numar-poza, upper-roman) ". ";
+}
+
+@media screen and (min-width: 901px) {
+    .galerie-item:nth-child(5) {
+        grid-column-start: 3;
+    }
+    
+    .galerie-item:nth-child(7) {
+        grid-column-start: 3;
+    }
+}

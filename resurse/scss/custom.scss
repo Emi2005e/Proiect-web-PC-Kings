@@ -1,0 +1,35 @@
+
+// Culori de background pentru 2 teme
+$primary: #8a2be2;
+$secondary: #ff7f50;
+
+// Culori de font
+$body-color: #2c3e50;
+$primary-text-emphasized: white;
+
+// Dimensiuni de ecran
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 800px,
+  lg: 1000px,
+  xl: 1200px,
+  xxl: 1400px
+);
+
+// Dimensiunea razelor de border
+$border-radius: 1.5rem;
+
+// Dimensiunea literelor headingurilor
+$h1-font-size: 3.5rem;
+$h2-font-size: 2.5rem;
+
+// Familia de font implicita
+$font-family-sans-serif: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+$btn-padding-y: 15px;
+$btn-padding-x: 30px;
+
+
+// Import bootstrap pentru a avea acces la variabilele si mixin-urile sale, dar si pentru a putea folosi grid-ul sau alte componente daca e nevoie
+@import "../../node_modules/bootstrap/scss/bootstrap";

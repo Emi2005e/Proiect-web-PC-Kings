@@ -163,7 +163,6 @@ ul.submeniu li:nth-child(5) a::after {
   }
 }
 @media screen and (max-width: 600px) {
-  /*bonus et3*/
   .icon-hamburger {
     display: block;
     position: relative;
@@ -174,13 +173,14 @@ ul.submeniu li:nth-child(5) a::after {
     cursor: pointer;
   }
   .icon-hamburger .bara {
+    display: block;
     position: absolute;
     left: 0;
     width: 100%;
     height: 3px;
     border-radius: 2px;
     background-color: var(--culoare-highlight);
-    animation: aparitie-bara 0.5s ease-out both;
+    animation: aparitie-bara 0.5s ease-out both !important;
   }
   .icon-hamburger .bara:nth-child(1) {
     top: 0;
@@ -191,17 +191,14 @@ ul.submeniu li:nth-child(5) a::after {
   .icon-hamburger .bara:nth-child(3) {
     top: 16px;
   }
-  .icon-hamburger {
-    /* BONUS 3 delayuri succesive pt bari*/
-  }
   .icon-hamburger .bara:nth-child(1) {
-    animation-delay: 0.2s;
+    animation-delay: 0.2s !important;
   }
   .icon-hamburger .bara:nth-child(2) {
-    animation-delay: 0.4s;
+    animation-delay: 0.4s !important;
   }
   .icon-hamburger .bara:nth-child(3) {
-    animation-delay: 0.6s;
+    animation-delay: 0.6s !important;
   }
   ul.meniu {
     display: none;
