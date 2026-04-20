@@ -1,0 +1,16 @@
+<!-- Etapa 5 cerinta 1 -->
+<div class="galerie-grid">
+    <% 
+        imagini.forEach(function(img, index) { 
+            let titluPoza = img.descriere ? img.descriere : img.cale_imagine;
+    %>
+    <figure class="galerie-item">
+        <picture>
+            <source media="(max-width: 900px)" srcset="<%= img.cale_mica_relativa %>">
+            
+            <img src="<%= img.cale_relativa %>" alt="<%= img.titlu %>" title="<%= titluPoza %>">
+        </picture>
+        <figcaption><%= img.descriere %></figcaption>
+    </figure>
+    <% }); %>
+</div>
