@@ -1,0 +1,66 @@
+{
+    "cale_galerie": "resurse/imagini/galerie",
+    "imagini": [
+        {
+            "cale_imagine": "RTX 2080.jpg",
+            "titlu": "Placă Video RTX",
+            "descriere": "O placă video de ultimă generație pentru gaming extrem.",
+            "sfert_ora": "1"
+        },
+        {
+            "cale_imagine": "componente-pc1.jpg",
+            "titlu": "Procesor AMD Ryzen",
+            "descriere": "Vedere macro a unui procesor.",
+            "sfert_ora": "1"
+        },
+        {
+            "cale_imagine": "PCGaming1.jpg",
+            "titlu": "Setup Gaming",
+            "descriere": "Un PC complet.",
+            "sfert_ora": "1"
+        },
+        {
+            "cale_imagine": "componente-pc3.jpg",
+            "titlu": "Memorii RAM",
+            "descriere": "Memorii RAM pentru performanță optimă.",
+            "sfert_ora": "1"
+        },
+        {
+            "cale_imagine": "RTX 2080.jpg",
+            "titlu": "Placă Video RTX",
+            "descriere": "O placă video de ultimă generație pentru gaming extrem.",
+            "sfert_ora": "1"
+        },
+        {
+            "cale_imagine": "componente-pc1.jpg",
+            "titlu": "Procesor AMD Ryzen",
+            "descriere": "Vedere macro a unui procesor.",
+            "sfert_ora": "1"
+        },
+        {
+            "cale_imagine": "PCGaming1.jpg",
+            "titlu": "Setup Gaming",
+            "descriere": "Un PC complet.",
+            "sfert_ora": "1"
+        },
+        {
+            "cale_imagine": "componente-pc3.jpg",
+            "titlu": "Memorii RAM",
+            "descriere": "Memorii RAM pentru performanță optimă.",
+            "sfert_ora": "1"
+        },
+        {
+            "cale_imagine": "RTX 2080.jpg",
+            "titlu": "Placă Video RTX",
+            "descriere": "O placă video de ultimă generație pentru gaming extrem.",
+            "sfert_ora": "1"
+        },
+        {
+            "cale_imagine": "componente-pc1.jpg",
+            "titlu": "Procesor AMD Ryzen",
+            "descriere": "Vedere macro a unui procesor.",
+            "sfert_ora": "1"
+        }
+
+    ]
+}
