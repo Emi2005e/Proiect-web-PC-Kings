@@ -3,14 +3,24 @@
     <% 
         imagini.forEach(function(img, index) { 
             let titluPoza = img.descriere ? img.descriere : img.cale_imagine;
+            let textAlt = img.alt ? img.alt : img.cale_imagine;
     %>
     <figure class="galerie-item">
         <picture>
             <source media="(max-width: 900px)" srcset="<%= img.cale_mica_relativa %>">
             
-            <img src="<%= img.cale_relativa %>" alt="<%= img.titlu %>" title="<%= titluPoza %>">
+            <img src="<%= img.cale_relativa %>" alt="<%= textAlt %>" title="<%= titluPoza %>">
         </picture>
-        <figcaption><%= img.descriere %></figcaption>
+        <figcaption>
+            <%= img.descriere %>
+            <% if (img.licenta && img.autor) { %>
+                <br>
+                <small style="font-weight: normal; font-size: 0.8em;">
+                    © Autor: <a href="<%= img.link_autor %>" target="_blank"><%= img.autor %></a> 
+                    (Licență: <%= img.licenta %>)
+                </small>
+            <% } %>
+        </figcaption>
     </figure>
     <% }); %>
 </div>
