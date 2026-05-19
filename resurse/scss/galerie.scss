@@ -30,6 +30,7 @@
         color: var(--culoare-text);
         font-size: 0.9rem;
         &::before {
+            counter-increment: numar-poza;
             content: counter(numar-poza, upper-roman) ". "; 
         }
     }
@@ -55,10 +56,6 @@ body {
     counter-reset: numar-poza;
 }
 
-.galerie-item figcaption::before {
-    counter-increment: numar-poza;
-    content: counter(numar-poza, upper-roman) ". ";
-}
 
 @media screen and (min-width: 901px) {
     .galerie-item:nth-child(5) {

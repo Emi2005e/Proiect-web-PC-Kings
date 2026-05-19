@@ -31,5 +31,23 @@ $btn-padding-y: 15px;
 $btn-padding-x: 30px;
 
 
+
+
+// Etapa 6-2 Cerinta A: Raza si grosimea borderului la butoane date din variabile
+$btn-border-width: 3px; 
+$btn-border-radius: 12px; 
+
+// Etapa 6-2 Cerinta F Schimba dimensiunea si culoarea bulinei de range
+// Bulina cu 50% mai mare fata de font-size-ul html-ului
+$form-range-thumb-width: 1.5rem; 
+$form-range-thumb-height: 1.5rem; 
+
+//Etapa 6-2 Schimb culoarea bulinei si a sliderului
+$form-range-thumb-bg: #8a2be2; // Culoarea bulinei
+$form-range-track-bg: #d3d3d3; // Culoarea barei pe care gliseaza
+
+
+
+
 // Import bootstrap pentru a avea acces la variabilele si mixin-urile sale, dar si pentru a putea folosi grid-ul sau alte componente daca e nevoie
 @import "../../node_modules/bootstrap/scss/bootstrap";
