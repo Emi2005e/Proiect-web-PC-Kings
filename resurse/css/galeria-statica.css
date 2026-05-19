@@ -4,7 +4,7 @@
   width: 100%;
   gap: 20px;
   padding: 20px 0;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
 }
 
 .galerie-item {
@@ -29,10 +29,6 @@
   color: var(--culoare-text);
   font-size: 0.9rem;
 }
-.galerie-item figcaption::before {
-  counter-increment: numar-poza;
-  content: counter(numar-poza, upper-roman) ". ";
-}
 .galerie-item:hover img {
   transform: scale(1.25) rotate(-10deg);
   border-width: 4px;
@@ -47,16 +43,4 @@
   .galerie-grid {
     grid-template-columns: 1fr;
   }
-}
-body {
-  counter-reset: numar-poza;
-}
-
-@media screen and (min-width: 901px) {
-  .galerie-item:nth-child(5) {
-    grid-column-start: 3;
-  }
-  .galerie-item:nth-child(7) {
-    grid-column-start: 3;
-  }
-}
+}/*# sourceMappingURL=galeria-statica.css.map */

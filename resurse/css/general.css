@@ -11,6 +11,7 @@ body {
   --margine-pagina: 120px;
   background-color: var(--culoare-fundal);
   color: var(--culoare-text);
+  transition: background-color 0.4s ease, color 0.4s ease;
   /* Cerinta 3A spatiere stg-dr*/
   --margine-pagina: 120px;
   /* Cerinta 3B gap*/
@@ -21,6 +22,57 @@ body {
   margin-right: var(--margine-pagina);
   /* Cerinta 4 */
   font-family: "Roboto", sans-serif;
+}
+
+/* Etapa 6-3 Tema dark mode suprascriu variabilele anterioare*/
+body.dark-theme {
+  --culoare-fundal: #121212;
+  --culoare-text: #f0f0f0;
+  --culoare-contur: #5dade2;
+  --culoare-highlight: #d7bde2;
+  --culoare-hover: #1abc9c;
+  --bk-dif: #1e1e1e66;
+  --tab1: #ffffff1a;
+  --tab2: #ffffff0d;
+}
+
+/* fac inputurile de bootstrap intunecate pe Dark Mode */
+body.dark-theme .form-control,
+body.dark-theme .form-select {
+  background-color: #222222;
+  color: var(--culoare-text);
+  border: 1px solid var(--culoare-contur);
+}
+
+/* Cand se da click pe un input */
+body.dark-theme .form-control:focus,
+body.dark-theme .form-select:focus {
+  background-color: #1a1a1a;
+  color: var(--culoare-text);
+  border-color: var(--culoare-highlight);
+  box-shadow: 0 0 0 0.25rem rgba(215, 189, 226, 0.25);
+}
+
+body.dark-theme .form-control::placeholder {
+  color: #a0a0a0;
+}
+
+body.dark-theme .form-floating > .form-control::placeholder {
+  color: transparent !important;
+}
+
+body.dark-theme .form-floating > label {
+  color: #a0a0a0;
+}
+
+body.dark-theme .form-floating > .form-control:focus ~ label,
+body.dark-theme .form-floating > .form-control:not(:placeholder-shown) ~ label {
+  color: var(--culoare-highlight);
+}
+
+body.dark-theme .form-floating > .form-control:focus ~ label::after,
+body.dark-theme .form-floating > .form-control:not(:placeholder-shown) ~ label::after {
+  background-color: #222222 !important;
 }
 
 html {
