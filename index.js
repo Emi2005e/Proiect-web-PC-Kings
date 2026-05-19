@@ -15,15 +15,13 @@ client=new pg.Client({
 
 client.connect()
 
-client.query("select * from prajituri where id>3", function(err, rez){
-    if (err){
-        console.log("Eroare", err)
+//Bonus etapa 6 (8.)
+let categoriiProduse = [];
+client.query("SELECT unnest(enum_range(NULL::tip_componenta))", function(err, rez) {
+    if (!err) {
+        categoriiProduse = rez.rows.map(rand => rand.unnest);
     }
-    else{
-        console.log(rez)
-    }
-})
-
+});
 
 // Bonus etapa 4
 function verificareEroriJSON() {
@@ -90,7 +88,7 @@ function verificareEroriJSON() {
             }
         }
 
-        //Bonus g
+        //Bonus g fara asta ca nu am stiut
         let frecventaId = {};
         for (let eroare of obErori.info_erori) {
             if (frecventaId[eroare.identificator]) {
@@ -111,7 +109,7 @@ function verificareEroriJSON() {
             }
         }
     }
-}
+}   
 
 
 
@@ -123,11 +121,11 @@ console.log("Folderul de lucru (process.cwd()):", process.cwd());
 /*
 Nu, __dirname și process.cwd() nu sunt mereu acelasi lucru. 
 __dirname returneaza mereu folderul in care se afla fizic fișierul codului (ex: index.js), 
-pe cand process.cwd() returneaza folderul din care ai deschis terminalul si ai dat comanda "node"
+pe cand process.cwd() returneaza folderul din care am deschis terminalul si am dat comanda "node"
 */
 
 
-//Cerinta 20 etapa 4 si etapa 5 cerinta 2 a
+//Cerinta 20 etapa 4
 let vect_foldere = ["temp", "logs", "backup", "fisiere_uploadate"];
 for (let folder of vect_foldere) {
     let caleFolder = path.join(__dirname, folder);
@@ -161,6 +159,7 @@ console.log("Cale fisier", __filename);
 //Cerinta 16 etapa 4
 app.use(function(req, res, next) {
     res.locals.ip = req.ip;
+    res.locals.categoriiProduse = categoriiProduse; //ca sa ajunga la EJS, trebuie sa pun in res.locals
     next();
 });
 
@@ -181,14 +180,14 @@ async function procesareImaginiGalerie() {
 
     let imaginiFiltrate = dateGalerie.imagini.filter(img => parseInt(img.sfert_ora) === sfert);
     if (imaginiFiltrate.length > 10) {
-        imaginiFiltrate = imaginiFiltrate.slice(0, 10);
+        imaginiFiltrate = imaginiFiltrate.slice(0, 10); 
     }
 
     let caleFolder = path.join(__dirname, dateGalerie.cale_galerie);
     for (let img of imaginiFiltrate) {
         let caleAbsolutaOriginal = path.join(caleFolder, img.cale_imagine);
         let extensie = path.extname(img.cale_imagine); // ex: .jpg
-        let numeFaraExt = path.basename(img.cale_imagine, extensie); // ex: poza1
+        let numeFaraExt = path.basename(img.cale_imagine, extensie); // ia numele fara extensie, ex: poza1
 
         let numeMic = numeFaraExt + "-mic" + extensie; // devine poza1-mic.jpg
         let caleAbsolutaMic = path.join(caleFolder, numeMic);
@@ -210,38 +209,76 @@ app.get(["/", "/index", "/home"], async function(req,res){
 } )
 
 //etapa 6
-app.get("/produse", function(req,res){
-    client.query("select * from prajituri where id>3", function(err, rez){
-    if (err){
-        console.log("Eroare", err)
-        afisareEroare(res, 2)
-    }
-    else{
-        res.render("pagini/produse", { produse: rez.rows, optiuni:[]});
-    }
-})
-})
+// Ruta pentru toate produsele (Filtrare + Extragere atribute dinamice etapa 6 bonus)
+app.get("/produse", async function(req, res) {
+    try {
+        let query = "SELECT * FROM componente";
+        let parametri = [];
+        if (req.query.categorie) {
+            query += " WHERE categorie = $1";
+            parametri.push(req.query.categorie);
+        }
+        let rezProduse = await client.query(query, parametri);
 
-app.get("/produs/:id", function(req,res){
-    clauzaWhere="";
-    if(req.query.tip){
-        clauzaWhere=`where tip_produs='${req.query.tip}'`
+        // 1. RANGE: Extrag minimul si maximul pentru slider garantie
+        let rezGarantie = await client.query("SELECT MIN(garantie_luni) as min_gar, MAX(garantie_luni) as max_gar FROM componente");
+        let minGar = rezGarantie.rows[0].min_gar || 0;
+        let maxGar = rezGarantie.rows[0].max_gar || 120;
+
+        // 2. DATALIST: Extrage producatorii unici
+        let rezProducatori = await client.query("SELECT DISTINCT producator FROM componente");
+        let producatori = rezProducatori.rows.map(r => r.producator);
+
+        // 3. RADIO: Extrag starile unice
+        let rezStare = await client.query("SELECT DISTINCT stare_produs FROM componente");
+        let stari = rezStare.rows.map(r => r.stare_produs);
+
+        // 4. SELECT MULTIPLU: Extrag tehnologiile unicesi despart stringurile cu virgule
+        let rezTehnologii = await client.query("SELECT DISTINCT unnest(string_to_array(tehnologii, ',')) as tehnologie FROM componente");
+        let tehnologii = rezTehnologii.rows.map(r => r.tehnologie.trim()).filter((v, i, a) => a.indexOf(v) === i && v !== ""); //indexof pentru a sterge dublurile din vectorul tehnologii, filter pentru a sterge valorile goale daca sunt
+
+        // 5. CHECKBOX: Extrag optiunile distincte pentru gaming (true/false)
+        let rezGaming = await client.query("SELECT DISTINCT recomandat_gaming FROM componente");
+        let optiuniGaming = rezGaming.rows.map(r => r.recomandat_gaming); 
+
+        // 6. INPUT TEXT: Extrag cel mai scump produs ca placeholder si calculez lungimea maxima admisa
+        let rezNumeExemplu = await client.query("SELECT nume FROM componente ORDER BY pret DESC LIMIT 1");
+        let numeExemplu = rezNumeExemplu.rowCount > 0 ? rezNumeExemplu.rows[0].nume : "RTX 4090";
+        let rezMaxLenNume = await client.query("SELECT MAX(LENGTH(nume)) as max_len FROM componente");
+        let maxLenNume = rezMaxLenNume.rows[0].max_len || 100;
+
+        // 7. TEXTAREA: Calculam lungimea maxima a descrierii pt atributul maxlength
+        let rezMaxLenDesc = await client.query("SELECT MAX(LENGTH(descriere)) as max_len FROM componente");
+        let maxLenDesc = rezMaxLenDesc.rows[0].max_len || 500;
+
+        // Trimit toate aceste variabile la EJS
+        res.render("pagini/produse", { 
+            produse: rezProduse.rows,
+            minGarantie: minGar,
+            maxGarantie: maxGar,
+            producatori: producatori,
+            stari: stari,
+            tehnologii: tehnologii,
+            optiuniGaming: optiuniGaming,
+            numeExemplu: numeExemplu,
+            maxLenNume: maxLenNume,
+            maxLenDesc: maxLenDesc
+        });
+
+    } catch (err) {
+        console.error("EROARE SQL ", err.message);
+        afisareEroare(res, 500, "Eroare DB");
     }
-    client.query(`select * from prajituri ${clauzaWhere}`, function(err, rez){
-    if (err){
-        console.log("Eroare", err)
-        afisareEroare(res, 2)
-    }
-    else{
-        if(rez.rowcount==0){
-            afisareEroare(res, 404, "Produs inexistent")
-        }
-        else{
-            res.render("pagini/produs", { produs: rez.rows[0] });
-        }
-    }
-})
-})
+});
+
+// Ruta pentru o singura componenta
+app.get("/produs/:id", function(req, res) {
+    client.query("SELECT * FROM componente WHERE id = $1", [req.params.id], function(err, rez) {
+        if (err) afisareEroare(res, 500);
+        else if (rez.rowCount === 0) afisareEroare(res, 404, "Produs inexistent");
+        else res.render("pagini/produs", { produs: rez.rows[0] });
+    });
+});
 
 //etapa 6
 
@@ -313,9 +350,9 @@ app.get("/eroare", function(req, res){
 // Etapa 5 cerinta 2 b
 function compileazaScss(caleScss, caleCss){
     if(!caleCss){
-        let numeFisExt=path.basename(caleScss);
-        let numeFis=numeFisExt.split(".")[0];
-        caleCss=numeFis+".css";
+        let numeFisExt=path.basename(caleScss); //iau numele fisierului cu extensie, ex: stil.scss
+        let numeFis=numeFisExt.split(".")[0]; //iau numele fisierului fara extensie, ex: stil
+        caleCss=numeFis+".css"; // adaug extensia css, ex: stil.css
     }
     
     if (!path.isAbsolute(caleScss))
@@ -326,7 +363,7 @@ function compileazaScss(caleScss, caleCss){
     // Etapa 5 Cerinta 2 c
     let caleBackup=path.join(obGlobal.folderBackup, "resurse/css");
     if (!fs.existsSync(caleBackup)) {
-        fs.mkdirSync(caleBackup,{recursive:true})
+        fs.mkdirSync(caleBackup,{recursive:true}) //recursive pentru a crea si folderele parinte daca nu exista, le creeaza in lant ca sa nu dea err
     }
 
     let numeFisCss=path.basename(caleCss);
@@ -351,7 +388,7 @@ function compileazaScss(caleScss, caleCss){
 
 // Etapa 5 Cerinta 2 d
 // la pornirea serverului, compilez toate fisierele scss din folderul resurse/scss
-vFisiere=fs.readdirSync(obGlobal.folderScss);
+vFisiere=fs.readdirSync(obGlobal.folderScss); //ia toate fisierele idn folderul scss si le pune in arrayul vFisiere
 for( let numeFis of vFisiere ){
     if (path.extname(numeFis)==".scss"){
         compileazaScss(numeFis);
@@ -367,6 +404,17 @@ fs.watch(obGlobal.folderScss, function(eveniment, numeFis){
         }
     }
 })
+
+
+app.get("/galerie", async function(req, res){
+    try {
+        let imaginiGalerie = await procesareImaginiGalerie();
+        res.render("pagini/galerie", { imagini: imaginiGalerie });
+    } catch (err) {
+        console.error("Eroare la incarcarea galeriei:", err);
+        afisareEroare(res);
+    }
+});
 
 // Cerinta 9 etapa 4
 app.get("/*pagina", function(req, res){
