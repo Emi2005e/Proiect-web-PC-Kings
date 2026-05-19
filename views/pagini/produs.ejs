@@ -1,36 +1,94 @@
 <!DOCTYPE html>
-<html  lang="ro">
-    <head>
-        <meta name="description" content="Cofetaria Dulcelind ofera prajituri, torturi, produse de patiserie cu optiunea de achizitie online si livrare prin curier.">
-        <meta name="keywords" content="cofetarie, Dulcelind, prajituri, torturi, dulce, pateuri, produse,<%- locals.prod.nume %>">
-        
-        <title>Cofetăria Dulcelind - <%- locals.prod.nume %></title>
-        <%- include("../fragmente/head") %>     
-        <link href="/resurse/css/produs.css" type="text/css" rel="stylesheet" />
-    </head>
+<html lang="ro">
+<head>
+    <meta name="description" content="Cumpără <%= locals.produs.nume %> de la PC Kings. Performanță garantată pentru sistemul tău.">
+    <meta name="keywords" content="pc kings, <%= locals.produs.categorie %>, <%= locals.produs.producator %>, <%= locals.produs.nume %>">
+    
+    <title>PC Kings - <%= locals.produs.nume %></title>
+    
+    <%- include("../fragmente/head") %>     
+    
+    <style>
+        #art-produs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            background: var(--tab1, white);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid var(--culoare-contur, #ccc);
+            margin-top: 20px;
+        }
+        .detalii-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        .imag-produs {
+            flex: 1;
+            text-align: center;
+            min-width: 300px;
+        }
+        .imag-produs img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .pret-mare {
+            font-size: 1.8em;
+            color: var(--primary, #8a2be2);
+            font-weight: bold;
+        }
+    </style>
+</head>
 
-        <%- include("../fragmente/header") %>
-    <main>
+<body>
+    <%- include("../fragmente/header") %>
+
+    <main class="container mt-5">
         <section>
-            <h2>Pagină produs</h2>
-                <article id="art-produs">
-                    <h3><span class="nume"><%- locals.prod.nume %></span></h3>
-                    <p>Pret: <span class="pret"><%- locals.prod.pret %> </span></p>
-                    <p>Descriere: <span class="descriere"><%- locals.prod.descriere %> </span></p>
-                    <p>Ingrediente: <span class="ingrediente"><%- locals.prod.ingrediente %> </span></p>
-                    <p>Calorii: <span class="calorii"><%- locals.prod.calorii %> </span></p>
-                    <p>Gramaj: <span class="gramaj"><%- locals.prod.gramaj %> </span></p>
-                    <p>Categorie: <span class="categorie"><%- locals.prod.categorie %> </span></p>
-                    <p>Pentru diabetici: <span class="pt_diabetici"><%- locals.prod.pt_diabetici %> </span></p>
-                    <p>Data adăugare: <span class="categorie"><%- locals.prod.data_adaugare %> </span></p>
-                    <figure class="imag-produs">
-                        <img  src="/resurse/imagini/produse/<%- locals.prod.imagine %>" alt="[imagine <%- locals.prod.nume %>]" />
-                    </figure>    
-                </article>
+            <div class="mb-3">
+                <a href="/produse" class="btn btn-outline-secondary">&larr; Înapoi la Toate Produsele</a>
+            </div>
             
+            <h2>Specificații Echipament</h2>
+            
+            <article id="art-produs">
+                
+                <div class="detalii-text">
+                    <h3><span class="nume text-uppercase"><%= locals.produs.nume %></span></h3>
+                    <p class="pret-mare">Preț: <span><%= locals.produs.pret %> RON</span></p>
+                    
+                    <hr>
+                    
+                    <p><strong>Producător:</strong> <span class="producator"><%= locals.produs.producator %></span></p>
+                    <p><strong>Categorie:</strong> <span class="categorie" style="text-transform: capitalize;"><%= locals.produs.categorie.replace('_', ' ') %></span></p>
+                    <p><strong>Garanție:</strong> <span class="garantie"><%= locals.produs.garantie_luni %> luni</span></p>
+                    <p><strong>Stare:</strong> <span class="stare"><%= locals.produs.stare_produs %></span></p>
+                    <p><strong>Tehnologii suportate:</strong> <span class="tehnologii"><%= locals.produs.tehnologii %></span></p>
+                    <p><strong>Recomandat pentru Gaming:</strong> <span class="gaming"><%= locals.produs.recomandat_gaming ? 'Da, performanță ridicată' : 'Nu, recomandat pentru Office/Standard' %></span></p>
+                    
+                    <% 
+                        let d = new Date(locals.produs.data_adaugare);
+                        let dataFormatata = d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
+                    %>
+                    <p><strong>Data listării:</strong> <span class="data"><%= dataFormatata %></span></p>
+                    
+                    <hr>
+                    
+                    <h4>Descriere detaliată:</h4>
+                    <p><span class="descriere"><%= locals.produs.descriere %></span></p>
+                </div>
+
+                <figure class="imag-produs">
+                    <img src="/resurse/imagini/produse/<%= locals.produs.imagine %>" alt="Imagine <%= locals.produs.nume %>" />
+                    <figcaption class="mt-2 text-muted">Imagine reprezentativă pentru <%= locals.produs.nume %></figcaption>
+                </figure>    
+                
+            </article>
         </section>
     </main>
 
     <%- include("../fragmente/footer") %>
-    </body>
+</body>
 </html>

@@ -6,7 +6,7 @@
     <span class="bara"></span>
     <span class="bara"></span>
 </label>
-<!-- nu merge pt ca am label si div, fac div in span -->
+
 
     <ul class="meniu">
         
@@ -24,15 +24,36 @@
         </li>
 
         <li>
+    <a href="/produse">
+        <i class="fa-solid fa-microchip"></i> 
+        <span class="text-optiune">Produse</span>
+    </a>
+    <ul class="submeniu">
+        <li><a href="/produse">Toate produsele</a></li>
+
+        <% if(locals.categoriiProduse) { %>
+            <% for (let cat of locals.categoriiProduse) { %>
+                <li>
+                    <a href="/produse?categorie=<%= cat %>">
+                        <%= cat.charAt(0).toUpperCase() + cat.slice(1).replace('_', ' ') %>
+                    </a>
+                </li>
+            <% } %>
+        <% } %>
+        </ul>
+        </li>
+
+        <!-- Etapa 6-1 Cerinta 4 -->
+        <li>
             <a href="catalog.html">
                 <i class="fa-solid fa-shop"></i> 
                 <span class="text-optiune">Magazin</span>
             </a>
             <ul class="submeniu">
                 <li><a href="/despre"><span class="text-optiune">Despre Noi</span></a></li>
-                <li><a href="catalog.html">Catalog Produse</a></li>
-                <li><a href="/produse">Pagina Produsului</a></li>
+                <li><a href="/produse">Catalog Produse</a></li>
                 <li><a href="cos.html">Coșul de Cumpărături</a></li>
+                <li><a href="/galerie">Galerie Foto</a></li>
             </ul>
         </li>
 
@@ -42,7 +63,17 @@
                 <span class="text-optiune">Contact</span>
             </a>
         </li>
-        
+
+        <!-- Etapa 6-2 Cerinta E -->
+         <!-- am folosit form-check form-switch ca sa fie facut mai frums(nu clasic patratos) -->
+         <li style="display: flex; align-items: center; justify-content: center; padding: 0 15px;">
+        <div class="form-check form-switch ms-3 d-flex align-items-center">
+            <input class="form-check-input me-2" type="checkbox" id="btn-tema" style="cursor: pointer;">
+            <label class="form-check-label" for="btn-tema" style="cursor: pointer;">
+                <i id="icon-tema" class="fa-solid fa-moon"></i>
+            </label>
+        </div>
+        </li>
     </ul>
 </nav>
         <h1>PC Kings <i class="fa-solid fa-crown" style="font-size: 1.2em; color: var(--culoare-highlight);"></i></h1>

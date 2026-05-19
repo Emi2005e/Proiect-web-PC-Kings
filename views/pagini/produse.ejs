@@ -1,86 +1,262 @@
 <!DOCTYPE html>
-<html  lang="ro">
-    <head>
-        <meta name="description" content="Cofetaria Dulcelind ofera prajituri, torturi, produse de patiserie cu optiunea de achizitie online si livrare prin curier.">
-        <meta name="keywords" content="cofetarie, Dulcelind, prajituri, torturi, dulce, pateuri, produse">
-        <link rel="stylesheet" href="/resurse/css/produse.css" type="text/css" />
-        <title>Cofetăria Dulcelind - Produse</title>
-        <%- include("../fragmente/head") %>     
-        <script type="text/javascript" src=/resurse/js/produse.js></script>
-        <script type="text/javascript" src=/resurse/js/produse-cos.js></script>
+<html lang="ro">
+<head>
+    <meta name="description" content="PC Kings ofera componente hardware de top, sisteme de gaming si echipamente office.">
+    <meta name="keywords" content="pc kings, componente pc, gaming, hardware, placi video, procesoare">
+    <title>Oferta Produse - PC Kings</title>
+    <%- include("../fragmente/head") %>     
+    <script type="text/javascript" src="/resurse/js/produse.js"></script>
+    
+    <style>
+        /* Etapa 6-1 Cerinta 7: Filtrele în Grid sau Flexbox */
+        #zona-filtre {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            background-color: var(--tab1, #f8f9fa);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .grup-filtru {
+            flex: 1 1 300px;
+            padding: 10px;
+            border: 1px solid var(--culoare-contur, #ccc);
+            border-radius: 5px;
+            background-color: white;
+        }
 
-    </head>
-    <body>
-
+        /* Etapa 6-1 Cerinta 5: Format afisare produse */
+        .grid-produse {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .produs {
+            display: flex;
+            justify-content: space-between;
+            border: 1px solid var(--culoare-contur);
+            padding: 20px;
+            border-radius: 8px;
+            background-color: var(--tab1);
+            color: var(--culoare-text);
+        }
+        .info-produs {
+            flex: 1;
+            padding-right: 20px;
+        }
+        .imagine-produs {
+            width: 250px;
+            height: auto;
+            object-fit: contain;
+        }
+        .tabel-specificatii {
+            width: 100%;
+            margin-bottom: 15px;
+            border-collapse: collapse;
+        }
+        .tabel-specificatii th, .tabel-specificatii td {
+            border: 1px solid var(--culoare-contur, #ddd);
+            padding: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
 
     <%- include("../fragmente/header") %>
 
-    <main>
-        <label> Nume: <input type="text" id="inp-nume"></label>
-        <!--<label> Maxim calorii: <input type="number" id="inp-calorii" value="10000"></label>-->
-        <div> Calorii:<!-- trebuie sa aiba acelasi name ca sa formeze un grup -->
-            <p><label>Dietetic (calorii &lt; 350)
-                <input id="i_rad1"  name="gr_rad" value="0:350" type="radio"/>
-            </label></p>
-            <p><label>Mediu (350 &le; calorii &lt; 700)
-                <input id="i_rad2"  name="gr_rad" value="350:700" type="radio"/>
-            </label>
-            <p><label>Ridicat caloric (700 &le; calorii)
-                <input id="i_rad3" name="gr_rad" value="700:1000000000" type="radio"/>
-            </label>
-            <p><label>Toate
-                <input id="i_rad4" checked name="gr_rad" value="toate" type="radio"/>
-            </label>
+    <main class="container mt-4">
+        <h1>Oferta Hardware PC Kings</h1>
+        
+        <section id="zona-filtre" class="container border p-4 rounded mb-4 shadow-sm" style="background-color: var(--tab1);">
+        <!-- Etapa 6-2 Cerinta D inputuri cate 3 pe un rand -->
+         <!-- Si mai jos bonut etapa 6, div uri dinamice cu for -->
+    <div class="row g-3 align-items-center">
+        
+        <div class="col-12 col-md-4">
+            <label class="form-label">Caută după Nume:</label>
+            <input type="text" id="inp-nume" class="form-control" placeholder="Ex: <%= locals.numeExemplu %>" maxlength="<%= locals.maxLenNume %>">
         </div>
 
+        <div class="col-12 col-md-4">
+            <label class="form-label d-block">Garanție minimă: <span id="infoRange" class="badge bg-primary"><%= locals.minGarantie %></span> Luni</label>
+            <div class="d-flex align-items-center gap-2">
+                <span class="fw-bold"><%= locals.minGarantie %></span>
+                <input type="range" id="inp-garantie" class="form-range flex-grow-1" value="<%= locals.minGarantie %>" min="<%= locals.minGarantie %>" max="<%= locals.maxGarantie %>">
+                <span class="fw-bold"><%= locals.maxGarantie %></span>
+            </div>
+        </div>
 
-        <label> Pret minim: <input type="range" id="inp-pret" value="0" min="0"  max="70"> <span id="infoRange">(0)</span></label>
-        <label>Select simplu:
-            <select id="inp-categorie">
-                <option id="sel-toate" selected value="toate">toate</option>
-                <% for (let opt of locals.optiuni) { %>
-                    <option value="<%- opt.unnest %>"><%- opt.unnest %> </option>
+        <div class="col-12 col-md-4">
+            <label class="form-label">Producător:</label>
+            <input list="lista-producatori" id="inp-producator" class="form-control" placeholder="Alege producător">
+            <datalist id="lista-producatori">
+                <option value="Toți producătorii">
+                <% if(locals.producatori) { %>
+                    <% for (let prod of locals.producatori) { %>
+                        <option value="<%= prod %>">
+                    <% } %>
+                <% } %>
+            </datalist>
+        </div>
+
+        <div class="col-12 col-md-6">
+            <label class="form-label d-block">Stare Produs:</label>
+            <div class="btn-group w-100" role="group">
+                <!-- Etapa 6-2 Cerinta C  am folosit btn-check ca sa arate mai bine (nu ca radio clasic) si btn-outline-primary pentru sleectare e full, deselectare doar text si margine-->
+                <input type="radio" class="btn-check" name="gr_stare" id="rad-toate" value="toate" checked autocomplete="off">
+                <label class="btn btn-outline-primary" for="rad-toate">Oricare</label>
+
+                <% if(locals.stari) { %>
+                    <% for (let i = 0; i < locals.stari.length; i++) { %>
+                        <input type="radio" class="btn-check" name="gr_stare" id="rad-stare-<%= i %>" value="<%= locals.stari[i] %>" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="rad-stare-<%= i %>"><%= locals.stari[i] %></label>
+                    <% } %>
+                <% } %>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6">
+            <label class="form-label d-block">Destinație:</label>
+            <div class="btn-group w-100" role="group">
+                <% if(locals.optiuniGaming) { %>
+                    <% for(let val of locals.optiuniGaming) { %>
+                        <!-- Etapa 6-2 Cerinta C -->
+                        <input type="checkbox" class="btn-check chk-destinatie" id="chk-gaming-<%= val %>" value="<%= val %>" checked autocomplete="off">
+                        <label class="btn btn-outline-success" for="chk-gaming-<%= val %>"><%= val ? 'Gaming' : 'Office' %></label>
+                    <% } %>
+                <% } %>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-12">
+            <!-- Etapa 6-2 Cerinta B -->
+             <!-- am facut un div cu clasa form-floatingla text-area am pus clasa form-control si un placeholder, iar apoi am pus tagul label imediat dupa -->
+              <!-- textarea pt ca altfel nu se paote aplica animatia pe textarea(animatia s epoate face doar pe elementul de dupa input) -->
+            <div class="form-floating mt-2">
+                <textarea class="form-control" placeholder="Cuvinte cheie" id="inp-descriere" style="height: 100px" maxlength="<%= locals.maxLenDesc %>"></textarea>
+                <label for="inp-descriere">Cuvinte cheie în descriere (separate prin virgulă)</label>
+                <div class="invalid-feedback">
+                    Ați introdus doar spații goale sau caractere nepermise! Vă rugăm să corectați.
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6">
+            <label class="form-label">Categorie:</label>
+            <select id="inp-categorie" class="form-select">
+                <option value="toate" selected>Oricare categorie</option>
+                <% if(locals.categoriiProduse) { %>
+                    <% for (let cat of locals.categoriiProduse) { %>
+                        <option value="<%= cat %>"><%= cat %></option>
+                    <% } %>
                 <% } %>
             </select>
-        </label>
+        </div>
 
-        <p>
-        <button class="c1 c2 c3" id="filtrare">Filtreaza</button> 
+        <div class="col-12 col-md-6">
+            <label class="form-label">Tehnologii (CTRL pentru selecție multiplă):</label>
+            <select id="inp-tehnologii" multiple class="form-select" style="height: 80px;">
+                <% if(locals.tehnologii) { %>
+                    <% for (let teh of locals.tehnologii) { %>
+                        <option value="<%= teh %>"><%= teh %></option>
+                    <% } %>
+                <% } %>
+            </select>
+        </div>
 
-        <button id="resetare">Reseteaza</button><br/>
-        <button id="sortCrescNume">Sorteaza crescator dupa pret si nume</button>
-        <button id="sortDescrescNume">Sorteaza descrescator dupa pret si nume</button>
-        
-        </p>
-      
-        <p id="p-suma">Apăsați Alt+"c" pentru suma preturilor produselor afișate. </p>
-  
+        <!-- Etapa 6-2 Cerinta A -->
+        <div class="col-12 text-center mt-4">
+            <button class="btn btn-primary btn-lg" id="btn-filtrare">
+                <i class="bi bi-funnel-fill"></i> <span class="d-none d-md-inline">Filtrează</span>
+            </button> 
+            <button class="btn btn-secondary btn-lg" id="btn-sortCresc">
+                <i class="bi bi-sort-alpha-down"></i> <span class="d-none d-md-inline">Sortează Crescător</span>
+            </button>
+            <button class="btn btn-primary btn-lg" id="btn-sortDesc">
+                <i class="bi bi-sort-alpha-up-alt"></i> <span class="d-none d-md-inline">Sortează Descrescător</span>
+            </button>
+            <button class="btn btn-secondary btn-lg text-white" id="btn-calcul">
+                <i class="bi bi-calculator-fill"></i> <span class="d-none d-md-inline">Calculează Medie</span>
+            </button>
+            <button class="btn btn-primary btn-lg" id="btn-resetare">
+                <i class="bi bi-arrow-counterclockwise"></i> <span class="d-none d-md-inline">Resetează</span>
+            </button>
+        </div>
+
+    </div>
+</section>
+
+
         <section id="produse">
-
-            <h2>Produse</h2>
+            <h2>Componente Hardware Disponibile</h2>
             <div class="grid-produse">
-                <% for( let prod of locals.produse) { %>
-                    <article class="produs" >
-                        <h3 class="nume">Nume: <a href="/produs/<%-prod.id %>" ><span class="val-nume"><%- prod.nume%></span></a></h3>
-                        <div class="info-prod">
-                            <p class="pret">Pret: <span class="val-pret"><%- prod.pret%></span></p>
-                            <p class="calorii">Calorii: <span class="val-calorii"><%- prod.calorii%></span></p>
-                            <p class="gramaj">Gramaj: <span class="val-gramaj"><%- prod.gramaj%></span></p>
-                        </div>
-                        <p class="categorie">Categorie:<span class="val-categorie"><%- prod.categorie%></span></p>
-                        <figure>
-                            <a href="/produs/<%-prod.id %>" ><img src="/resurse/imagini/produse/<%- prod.imagine %>" style="width:50%;height:auto;" alt="[imagine <%- prod.nume %>]" /></a>
-                        </figure>
-                        <label class="selecteaza-cos">
-                            Selectează:<br/>
-                            <input type="checkbox" class="select-cos" value="<%-prod.id %>" autocomplete="off">
-                        </label>
-                    </article>
-                <% }%>
+                <% if (locals.produse && locals.produse.length > 0) { %>
+                    <% for( let prod of locals.produse) { %>
+                        
+                        <article id="ent<%= prod.id %>" class="produs <%= prod.categorie %>">
+                            <div class="info-produs">
+                                
+                                <h3 class="nume">Nume: <a href="/produs/<%= prod.id %>"><span class="val-nume"><%= prod.nume %></span></a></h3>
+                                
+                                <table class="tabel-specificatii">
+                                    <thead>
+                                        <tr>
+                                            <th>Preț (RON)</th>
+                                            <th>Stare</th>
+                                            <th>Tehnologii</th>
+                                            <th>Data Adăugării</th>
+                                            <th>Gaming</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="val-pret"><%= prod.pret %></td>
+                                            <td class="val-stare"><%= prod.stare_produs %></td>
+                                            <td class="val-tehnologii"><%= prod.tehnologii %></td>
+                                            <td>
+                                                <% 
+                                                    const zile = ['Duminica', 'Luni', 'Marti', 'Miercuri', 'Joi', 'Vineri', 'Sambata'];
+                                                    const luni = ['Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie', 'Iulie', 'August', 'Septembrie', 'Octombrie', 'Noiembrie', 'Decembrie'];
+                                                    let d = new Date(prod.data_adaugare);
+                                                    let dataFormatata = d.getDate() + '(' + zile[d.getDay()] + ')/' + luni[d.getMonth()] + '/' + d.getFullYear();
+                                                %>
+                                                <time datetime="<%= d.toISOString() %>"><%= dataFormatata %></time>
+                                            </td>
+                                            <td class="val-gaming"><%= prod.recomandat_gaming ? 'Da' : 'Nu' %></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <p class="descriere"><strong>Descriere:</strong> <span class="val-descriere"><%= prod.descriere %></span></p>
+                                
+                                <p class="garantie" style="display:none;">Garantie: <span class="val-garantie"><%= prod.garantie_luni %></span> luni</p>
+                                <p class="producator" style="display:none;">Producator: <span class="val-producator"><%= prod.producator %></span></p>
+                                <p class="categorie-text">Categorie: <span class="val-categorie"><%= prod.categorie %></span></p>
+                            </div>
+
+                            <figure>
+                                <a href="/produs/<%= prod.id %>">
+                                    <img src="/resurse/imagini/produse/<%= prod.imagine %>" class="imagine-produs" alt="[imagine <%= prod.nume %>]" />
+                                </a>
+                            </figure>
+
+                            <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                                <label class="selecteaza-cos text-center">
+                                    Selectează:<br/>
+                                    <input type="checkbox" class="select-cos" value="<%= prod.id %>" autocomplete="off" style="width: 25px; height: 25px;">
+                                </label>
+                            </div>
+                        </article>
+                    <% } %>
+                <% } else { %>
+                    <p>Nu există produse în baza de date.</p>
+                <% } %>
             </div>
         </section>
     </main>
 
     <%- include("../fragmente/footer") %>
-    </body>
+</body>
 </html>
