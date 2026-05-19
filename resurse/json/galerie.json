@@ -4,63 +4,67 @@
         {
             "cale_imagine": "RTX 2080.jpg",
             "titlu": "Placă Video RTX",
-            "descriere": "O placă video de ultimă generație pentru gaming extrem.",
-            "sfert_ora": "1"
+            "descriere": "O placă video de ultimă generație.",
+            "sfert_ora": "3"
         },
         {
             "cale_imagine": "componente-pc1.jpg",
             "titlu": "Procesor AMD Ryzen",
-            "descriere": "Vedere macro a unui procesor.",
-            "sfert_ora": "1"
+            "descriere": "Procesor.",
+            "sfert_ora": "3"
         },
         {
             "cale_imagine": "PCGaming1.jpg",
             "titlu": "Setup Gaming",
             "descriere": "Un PC complet.",
-            "sfert_ora": "1"
+            "sfert_ora": "3"
         },
         {
             "cale_imagine": "componente-pc3.jpg",
             "titlu": "Memorii RAM",
             "descriere": "Memorii RAM pentru performanță optimă.",
-            "sfert_ora": "1"
+            "sfert_ora": "3"
         },
         {
             "cale_imagine": "RTX 2080.jpg",
             "titlu": "Placă Video RTX",
-            "descriere": "O placă video de ultimă generație pentru gaming extrem.",
-            "sfert_ora": "1"
+            "descriere": "O placă video de ultimă generație.",
+            "sfert_ora": "3"
         },
         {
             "cale_imagine": "componente-pc1.jpg",
             "titlu": "Procesor AMD Ryzen",
-            "descriere": "Vedere macro a unui procesor.",
-            "sfert_ora": "1"
+            "descriere": "Procesor.",
+            "sfert_ora": "3"
         },
         {
             "cale_imagine": "PCGaming1.jpg",
             "titlu": "Setup Gaming",
             "descriere": "Un PC complet.",
-            "sfert_ora": "1"
+            "sfert_ora": "3"
         },
         {
             "cale_imagine": "componente-pc3.jpg",
             "titlu": "Memorii RAM",
             "descriere": "Memorii RAM pentru performanță optimă.",
-            "sfert_ora": "1"
+            "sfert_ora": "3"
         },
         {
             "cale_imagine": "RTX 2080.jpg",
             "titlu": "Placă Video RTX",
-            "descriere": "O placă video de ultimă generație pentru gaming extrem.",
-            "sfert_ora": "1"
+            "descriere": "O placă video de ultimă generație.",
+            "sfert_ora": "3"
         },
         {
-            "cale_imagine": "componente-pc1.jpg",
-            "titlu": "Procesor AMD Ryzen",
-            "descriere": "Vedere macro a unui procesor.",
-            "sfert_ora": "1"
-        }
+        "cale_imagine": "laptop.jpg",
+        "titlu": "Lenovo G500s",
+        "descriere": "Laptop Lenovo G500s",
+        "sfert_ora": "3",
+        "alt": "Laptop Lenovo negru",
+        "licenta": "CC BY-SA 4.0",
+        "autor": "Raimond Spekking",
+        "link_autor": "https://commons.wikimedia.org/w/index.php?search=computer&title=Special%3AMediaSearch&type=image"
+        }   
 
     ]
 }
